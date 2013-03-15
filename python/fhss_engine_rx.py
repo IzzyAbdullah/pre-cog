@@ -178,9 +178,9 @@ class fhss_engine_rx(gr.block):
         if not self.know_time:
             if self.found_time and self.found_rate:
                 self.know_time = True
-        
-        #get current time
-        self.time_update += (self.sample_period * ninput_items)         
+        else:
+            #get current time
+            self.time_update += (self.sample_period * ninput_items)         
             
         if self.rx_state == RX_FOUND:
             if self.time_update > self.start_hop:

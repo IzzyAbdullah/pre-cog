@@ -254,15 +254,16 @@ class fhss_engine_tx(gr.block):
                 self.interval_start = self.time_transmit_start + self.lead_limit
         
         #get current time
-        self.time_update += (self.sample_period * ninput_items)
+        else:  
+            self.time_update += (self.sample_period * ninput_items)
 
-        #determine if it's time for us to start tx'ing, start process self.lead_limit seconds
-        #before our slot actually begins (i.e. deal with latency)
-        if self.time_update > self.time_transmit_start:
-            self.antenna_start = self.interval_start + self.post_guard
-            self.tx_frames()  #do more than this?
-            self.interval_start += self.hop_interval
-            self.time_transmit_start = self.interval_start - self.lead_limit
+            #determine if it's time for us to start tx'ing, start process self.lead_limit seconds
+            #before our slot actually begins (i.e. deal with latency)
+            if self.time_update > self.time_transmit_start:
+                self.antenna_start = self.interval_start + self.post_guard
+                self.tx_frames()  #do more than this?
+                self.interval_start += self.hop_interval
+                self.time_transmit_start = self.interval_start - self.lead_limit
             
 
 
