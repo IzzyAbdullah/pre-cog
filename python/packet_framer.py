@@ -99,6 +99,7 @@ class packet_framer(gr.block):
                 False, #pad_for_usrp,
                 self._whitener_offset,
                 )
+            pkt += "".join(map(chr, [0x55] * 64))
             self._pkt = numpy.fromstring(pkt, numpy.uint8)
             if self._use_whitener_offset:
                 self._whitener_offset = (self._whitener_offset + 1) % 16
